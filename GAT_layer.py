@@ -21,7 +21,7 @@ class GraphAttentionLayer(nn.Module):
             a is an attention mechanism that computes the attention coefficients e_ij, and σ is an activation function.
 
     """
-    def __init__(self, in_features: int, out_features: int, n_heads: int, concat: bool = False, dropout: float = 0.4, leaky_relu_slope: float = 0.2):
+    def __init__(self, in_features: int, out_features: int, n_heads: int, concat: bool = False, dropout: float = 0.2, leaky_relu_slope: float = 0.2):
         super(GraphAttentionLayer, self).__init__()
 
         self.n_heads = n_heads # Number of attention heads

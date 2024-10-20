@@ -20,7 +20,7 @@ def pad_with(vector, pad_width, iaxis, kwargs):
 
 criterion = nn.MSELoss()
 device = torch.device("cuda:0")
-Net = neural_bayes()
+Net = torch.jit.load('GAT_encoder_scripted.pt')
 Net.to(device)
 optimizer = optim.Adam(Net.parameters(), lr=0.001)
 #np.random.seed(1)

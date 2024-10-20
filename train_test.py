@@ -16,7 +16,10 @@ import torchvision.transforms as transforms
 #    pad_value = kwargs.get('padder', 10)
 #    vector[:pad_width[0]] = pad_value
 #    vector[-pad_width[1]:] = pad_value
+
+### two set of theta
 y_test = np.array([1,0.15,1,0.1,0.5,0.55,-0.3])
+# y_test = np.array([2,0.03,0.5,0.3,1,-0.7,0.5])
 criterion = nn.MSELoss()
 device = torch.device("cuda:0")
 y_test = torch.from_numpy(y_test).float().to(device)

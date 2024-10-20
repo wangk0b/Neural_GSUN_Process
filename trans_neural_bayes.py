@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 #graphical neural bayes CNN + Transformer
 import torch.nn.functional as F
+from GAT_layer import GraphAttentionLayer
 
 class ResidualBlock(nn.Module):
     def __init__(self, inchannel, outchannel, stride=1):
@@ -104,6 +105,32 @@ class CNN_Bayes(nn.Module):
             #print(output.shape)
             output=self.layer3(output)
             return output
+
+
+class GAT_Encoder(nn.Module):
+    def __init__(self, in_features, out_features, n_heads, concat = True, sample_size):
+        super(GAT_Encoder, self).__init__()
+        self.GAT_1 = GraphAttentionLayer(in_features[0], out_features[0], n_heads[0], concat)
+        self.GAT_2 = GraphAttentionLayer(in_features[1], out_features[1], n_heads[1], concat)
+        self.GAT_3 = GraphAttentionLayer(in_features[2], out_features[2], n_heads[2], concat)
+        encoder_layer = nn.TransformerEncoderLayer(d_model=512, nhead=8)
+        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=6)
+        self.linear_1 = nn.Linear(sample_size*512,2048)
+        self.linear_2 = nn.Linear(2048,256)
+        self.linear_3 = nn.Linear(256,7)
+        
+
+    def forward(self, x):
+        out = self.GAT_1(x)
+        out = self.GAT_2(out)
+        out = self.GAT_3(out)
+        out = self.encoder(out)
+        out = self.linear_1(out)
+        out = self.linear_2(out)
+        out = self.linear_3(out)                                                                                
+        return out
+
+
 
 
 

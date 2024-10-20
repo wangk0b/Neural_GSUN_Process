@@ -20,6 +20,9 @@ y_test = np.array([1,0.15,1,0.1,0.5,0.55,-0.3])
 criterion = nn.MSELoss()
 device = torch.device("cuda:0")
 y_test = torch.from_numpy(y_test).float().to(device)
+
+#load the trained networks
+#Net = torch.jit.load('CNN_scripted.pt')
 Net = torch.jit.load('GAT_encoder_scripted.pt')
 Net.to(device)
 optimizer = optim.SGD(Net.parameters(), lr=0.1)

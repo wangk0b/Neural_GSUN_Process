@@ -6,4 +6,4 @@ Neural-based inference for the generalized unified skew-normal (GSUN) process
 3. The proc_gen file is a python implementation for the GSUN process generation
 4. The GAT_layer file is for the graphical attention network
 5. The trans_neural_bayes file involves all kinds of neural Bayes estimators tested and studied in the paper
-6. The train_test and train_new files are used to get the estimations for the two specified set of parameters in the paper.
+6. The train_test file is used to get the estimations for the two specified set of parameters in the paper.
